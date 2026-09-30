@@ -229,7 +229,7 @@ public class SysUserController extends BaseController {
     /**
      * 重置密码
      */
-    @ApiEncrypt
+//    @ApiEncrypt
     @SaCheckPermission("system:user:resetPwd")
     @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @RepeatSubmit()

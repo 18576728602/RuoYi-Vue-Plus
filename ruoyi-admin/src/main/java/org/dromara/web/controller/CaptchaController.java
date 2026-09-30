@@ -138,7 +138,7 @@ public class CaptchaController {
         } else {
             codeGenerator = new RandomGenerator(captchaProperties.getCharLength());
         }
-        WaveAndCircleCaptcha captcha = new WaveAndCircleCaptcha(160, 60);
+        WaveAndCircleCaptcha captcha = new WaveAndCircleCaptcha(160, 60, 4, 0); // interfereCount=0，无圆圈、无波浪线，完全无干扰便于辨认
         // captcha.setBackground(Color.WHITE); // 不设置就是透明底
         captcha.setFont(new Font("Arial", Font.BOLD, 45));
         captcha.setGenerator(codeGenerator);

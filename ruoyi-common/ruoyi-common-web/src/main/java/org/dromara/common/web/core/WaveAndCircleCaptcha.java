@@ -55,8 +55,8 @@ public class WaveAndCircleCaptcha extends AbstractCaptcha {
 
         try {
             drawString(g, code);
-            // 扭曲
-            shear(g, this.width, this.height, ObjectUtil.defaultIfNull(this.background, Color.WHITE));
+            // 扭曲（为便于老年用户辨认，此处不再对字符做波浪扭曲）
+            // shear(g, this.width, this.height, ObjectUtil.defaultIfNull(this.background, Color.WHITE));
             drawInterfere(g);
         } finally {
             g.dispose();

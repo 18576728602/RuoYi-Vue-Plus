@@ -57,7 +57,8 @@ public class PasswordAuthStrategy implements IAuthStrategy {
         String code = loginBody.getCode();
         String uuid = loginBody.getUuid();
 
-        boolean captchaEnabled = captchaProperties.getEnable();
+//        boolean captchaEnabled = captchaProperties.getEnable();
+        boolean captchaEnabled = false;//强制关闭验证码
         // 验证码开关
         if (captchaEnabled) {
             validateCaptcha(tenantId, username, code, uuid);

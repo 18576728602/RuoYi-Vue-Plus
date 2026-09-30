@@ -87,6 +87,12 @@
             <artifactId>ruoyi-demo</artifactId>
         </dependency>
 
+        <!--  预算模块  -->
+        <dependency>
+            <groupId>org.dromara</groupId>
+            <artifactId>ruoyi-budget</artifactId>
+        </dependency>
+
         <!--  工作流模块  -->
         <dependency>
             <groupId>org.dromara</groupId>

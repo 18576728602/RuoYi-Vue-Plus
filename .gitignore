@@ -50,3 +50,7 @@ nbdist/
 !*/build/*.xml
 
 .flattened-pom.xml
+
+######################################################################
+# Business SQL scripts (kept local only)
+script/sql/

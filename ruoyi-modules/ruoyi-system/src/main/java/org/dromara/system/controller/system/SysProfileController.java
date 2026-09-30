@@ -87,7 +87,7 @@ public class SysProfileController extends BaseController {
      * @param bo 新旧密码
      */
     @RepeatSubmit
-    @ApiEncrypt
+//    @ApiEncrypt
     @Log(title = "个人信息", businessType = BusinessType.UPDATE)
     @PutMapping("/updatePwd")
     public R<Void> updatePwd(@Validated @RequestBody SysUserPasswordBo bo) {

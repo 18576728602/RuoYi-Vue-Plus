@@ -83,7 +83,7 @@ public class AuthController {
      * @param body 登录信息
      * @return 结果
      */
-    @ApiEncrypt
+//    @ApiEncrypt
     @PostMapping("/login")
     public R<LoginVo> login(@RequestBody String body) {
         LoginBody loginBody = JsonUtils.parseObject(body, LoginBody.class);
@@ -107,7 +107,7 @@ public class AuthController {
         Long userId = LoginHelper.getUserId();
         scheduledExecutorService.schedule(() -> {
             SseMessageDto dto = new SseMessageDto();
-            dto.setMessage(DateUtils.getTodayHour(new Date()) + "好，欢迎登录 RuoYi-Vue-Plus 后台管理系统");
+            dto.setMessage(DateUtils.getTodayHour(new Date()) + "好，欢迎登录预算管理系统");
             dto.setUserIds(List.of(userId));
             SseMessageUtils.publishMessage(dto);
         }, 5, TimeUnit.SECONDS);
@@ -186,7 +186,7 @@ public class AuthController {
     /**
      * 用户注册
      */
-    @ApiEncrypt
+//    @ApiEncrypt
     @PostMapping("/register")
     public R<Void> register(@Validated @RequestBody RegisterBody user) {
         if (!configService.selectRegisterEnabled(user.getTenantId())) {

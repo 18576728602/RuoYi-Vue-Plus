@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dromara.budget.mapper.BudgetTemplateItemMapper">
+
+    <resultMap type="org.dromara.budget.domain.vo.BudgetTemplateItemVo" id="BudgetTemplateItemVoResult">
+        <id property="id" column="id"/>
+        <result property="planId" column="plan_id"/>
+        <result property="fromPlanId" column="from_plan_id"/>
+        <result property="templateCode" column="template_code"/>
+        <result property="templateName" column="template_name"/>
+        <result property="itemCode" column="item_code"/>
+        <result property="itemName" column="item_name"/>
+        <result property="parentCode" column="parent_code"/>
+        <result property="itemLevel" column="item_level"/>
+        <result property="itemOrder" column="item_order"/>
+        <result property="responsibleDept" column="responsible_dept"/>
+        <result property="isSummary" column="is_summary"/>
+        <result property="isEditable" column="is_editable"/>
+        <result property="formula" column="formula"/>
+    </resultMap>
+
+    <!-- 分页查询某方案的已停用科目(del_flag=1)，绕过逻辑删除过滤，用于还原管理 -->
+    <select id="selectDisabledPage" resultMap="BudgetTemplateItemVoResult">
+        SELECT id, plan_id, from_plan_id, template_code, template_name, item_code, item_name,
+               parent_code, item_level, item_order, responsible_dept, is_summary, is_editable, formula
+        FROM budget_template_item
+        WHERE del_flag = 1
+        AND plan_id = #{planId}
+        <if test="templateCode != null and templateCode != ''">
+            AND template_code = #{templateCode}
+        </if>
+        ORDER BY template_code, item_order, id
+    </select>
+
+    <!-- 还原已停用科目(del_flag 1 -> 0) -->
+    <update id="restoreByIds">
+        UPDATE budget_template_item
+        SET del_flag = 0, update_time = NOW()
+        WHERE del_flag = 1
+        AND id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>
